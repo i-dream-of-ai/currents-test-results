@@ -1,9 +1,18 @@
+#!/usr/bin/env node
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import dotenv from "dotenv";
 import { z } from "zod";
 
-const CURRENTS_API_BASE = "https://api-staging.currents.dev/v1";
+dotenv.config();
+
+const CURRENTS_API_URL =
+  process.env.CURRENTS_API_URL || "https://api.currents.dev/v1";
 const USER_AGENT = "currents-app/1.0";
+const CURRENTS_API_KEY = process.env.CURRENTS_API_KEY || "";
+if (CURRENTS_API_KEY === "") {
+  console.error("CURRENTS_API_KEY env variable is not set.");
+}
 
 // Create server instance
 const server = new McpServer({
@@ -20,17 +29,18 @@ async function makeCurrentsRequest<T>(url: string): Promise<T | null> {
   const headers = {
     "User-Agent": USER_AGENT,
     Accept: "application/geo+json",
-    "Authorization": "Bearer FlLFehSQxlNkBlh7C2X2E1RT43IiHNpF3vD578vVzQJUWHHuvsifXHkkQgTz3mtg"
+    Authorization: "Bearer " + CURRENTS_API_KEY,
   };
 
   try {
     const response = await fetch(url, { headers });
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      console.error(`HTTP error! status: ${response.status}`);
+      return null;
     }
     return (await response.json()) as T;
-  } catch (error) {
-    console.error("Error making Currents request:", error);
+  } catch (error: any) {
+    console.error("Error making Currents request:", error.toString());
     return null;
   }
 }
@@ -134,7 +144,7 @@ server.tool(
     runId: z.string(),
   },
   async ({ runId }) => {
-    const runsUrl = `${CURRENTS_API_BASE}/runs/${runId}`;
+    const runsUrl = `${CURRENTS_API_URL}/runs/${runId}`;
     const runData = await makeCurrentsRequest<RunResponse>(runsUrl);
 
     if (!runData) {
@@ -159,10 +169,30 @@ server.tool(
   }
 );
 
+server.tool(
+  "get-api-config",
+  "Get Currents API config currently used for Currents API requests",
+  () => {
+    return {
+      content: [
+        {
+          type: "text",
+          text: CURRENTS_API_KEY,
+        },
+        {
+          type: "text",
+          text: CURRENTS_API_URL,
+        },
+      ],
+    };
+  }
+);
+
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error("Currents MCP Server running on stdio");
+  console.log("Currents MCP Server running on stdio");
+  await new Promise(() => {});
 }
 
 main().catch((error) => {

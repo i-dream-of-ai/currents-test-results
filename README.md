@@ -7,13 +7,21 @@
 {
   "mcpServers": {
     "currents": {
-      "command": "node",
+      "name": "Currents",
+      "description": "Currents MCP server",
+      "command": "npx",
       "args": [
-        "/Users/miguelangarano/Documents/GitHub/currents-mcp/build/index.js"
-      ]
+        "-y",
+        "/Users/miguelangarano/Documents/GitHub/currents-mcp/build/index.js" // This will change to @currents/mcp
+      ],
+      "env": { // This is the current way for setting env variables (see [google maps](https://github.com/modelcontextprotocol/servers/tree/main/src/google-maps#npx) example. See [slack](https://github.com/modelcontextprotocol/servers/tree/main/src/slack#npx) example)
+        "CURRENTS_API_KEY": "your-api-key",
+        "CURRENTS_API_URL": "https://api-staging.currents.dev/v1" // will dissapear by default using production url
+      }
     }
   }
 }
+
 ```
 5. Open the cursor settings and add a new mcp server
    

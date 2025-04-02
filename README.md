@@ -16,7 +16,7 @@
       ],
       "env": { // This is the current way for setting env variables (see [google maps](https://github.com/modelcontextprotocol/servers/tree/main/src/google-maps#npx) example. See [slack](https://github.com/modelcontextprotocol/servers/tree/main/src/slack#npx) example)
         "CURRENTS_API_KEY": "your-api-key",
-        "CURRENTS_API_URL": "https://api-staging.currents.dev/v1" // will dissapear by default using production url
+        "CURRENTS_API_URL": "https://api-staging.currents.dev/v1" // will disappear by default using production url
       }
     }
   }

@@ -126,7 +126,7 @@ interface RunResponse {
   };
 }
 
-// Register weather tools
+// Register Currents tools
 server.tool(
   "get-run",
   "Get run details for a defined run ID",

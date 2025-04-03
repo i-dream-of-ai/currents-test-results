@@ -28,7 +28,6 @@
   "devDependencies": {
     "@types/node": "^22.13.17",
     "typescript": "^5.8.2",
-    "@release-it/conventional-changelog": "^7.0.2",
     "release-it": "^18.1.2"
   }
 }

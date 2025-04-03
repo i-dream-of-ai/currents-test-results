@@ -24,15 +24,27 @@ Get a Currents API key by following the [instructions here](https://docs.current
 
 ### Usage with Cursor Editor
 
-Go to Cursor Settings > MCP > Enable
+1. Go to Cursor Settings > MCP > Enable
+2. Add the following to your `mcp.json`.
 
-1. Clone the project
-2. Run `npm install`
-3. Run `npm run build`
-4. Check the MCP in Cursor's settings
-
-   <img width="554" alt="image" src="https://github.com/user-attachments/assets/2142f958-12d4-469d-9d45-85ed0c05fd09" />
-
+### NPX
+```
+{
+  "mcpServers": {
+    "currents": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "./build/index.js" // This will change to currents-mcp when we publish the package
+      ],
+      "env": { // This is the current way for setting env variables (see [google maps](https://github.com/modelcontextprotocol/servers/tree/main/src/google-maps#npx) example. See [slack](https://github.com/modelcontextprotocol/servers/tree/main/src/slack#npx) example)
+        "CURRENTS_API_KEY": "your-api-key",
+        "CURRENTS_API_URL": "https://api-staging.currents.dev/v1" // will disappear by default using production url
+      }
+    }
+  }
+}
+```
 
 ### Usage with Claude Desktop
 Add the following to your `claude_desktop_config.json`:

@@ -19,7 +19,9 @@ This is a MCP server that allows you to use Currents API.
 1. Clone the project
 2. Run `npm install`
 3. Run `npm run build`
-4. Replace with the `args` with `index.js` build path of your project.
+4. Check the MCP in Cursor's settings
+
+   <img width="554" alt="image" src="https://github.com/user-attachments/assets/2142f958-12d4-469d-9d45-85ed0c05fd09" />
 
 ## Setup
 
@@ -28,28 +30,8 @@ This is a MCP server that allows you to use Currents API.
 Get a Currents API key by following the [instructions here](https://docs.currents.dev/resources/api/api-keys)
 
 ### Usage with Cursor Editor
-Add the following to your `mcp.json`:
 
-### NPX
-```
-{
-  "mcpServers": {
-    "currents": {
-      "name": "Currents",
-      "description": "Currents MCP server",
-      "command": "npx",
-      "args": [
-        "-y",
-        "/Users/miguelangarano/Documents/GitHub/currents-mcp/build/index.js" // This will change to currents-mcp when we publish the package
-      ],
-      "env": { // This is the current way for setting env variables (see [google maps](https://github.com/modelcontextprotocol/servers/tree/main/src/google-maps#npx) example. See [slack](https://github.com/modelcontextprotocol/servers/tree/main/src/slack#npx) example)
-        "CURRENTS_API_KEY": "your-api-key",
-        "CURRENTS_API_URL": "https://api-staging.currents.dev/v1" // will disappear by default using production url
-      }
-    }
-  }
-}
-```
+Go to Cursor Settings > MCP > Enable
 
 
 ### Usage with Claude Desktop
@@ -63,7 +45,7 @@ Add the following to your `claude_desktop_config.json`:
       "command": "npx",
       "args": [
         "-y",
-        "/Users/miguelangarano/Documents/GitHub/currents-mcp/build/index.js" // This will change to currents-mcp when we publish the package
+        "./build/index.js" // This will change to currents-mcp when we publish the package
       ],
       "env": { // This is the current way for setting env variables (see [google maps](https://github.com/modelcontextprotocol/servers/tree/main/src/google-maps#npx) example. See [slack](https://github.com/modelcontextprotocol/servers/tree/main/src/slack#npx) example)
         "CURRENTS_API_KEY": "your-api-key",

@@ -1,26 +1,57 @@
+# Currents MCP Server
+
+This is a MCP server that allows you to use Currents API.
+
+## Tools
+
+1. `get-api-config`
+
+- Get the API key and URL used to make requests to Currents API
+
+2. `get-run`
+
+- Get the run information by its ID
+
+3. `get-instance`
+
+- Get the instance information by its ID
+
 1. Clone the project
 2. Run `npm install`
 3. Run `npm run build`
-4. Replace with the `args` with `index.js` build path of your project.
+4. Check the MCP in Cursor's settings
 
+   <img width="554" alt="image" src="https://github.com/user-attachments/assets/2142f958-12d4-469d-9d45-85ed0c05fd09" />
+
+## Setup
+
+### Api Key
+
+Get a Currents API key by following the [instructions here](https://docs.currents.dev/resources/api/api-keys)
+
+### Usage with Cursor Editor
+
+Go to Cursor Settings > MCP > Enable
+
+
+### Usage with Claude Desktop
+Add the following to your `claude_desktop_config.json`:
+
+### NPX
 ```
 {
   "mcpServers": {
     "currents": {
-      "command": "node",
+      "command": "npx",
       "args": [
-        "/Users/miguelangarano/Documents/GitHub/currents-mcp/build/index.js"
-      ]
+        "-y",
+        "./build/index.js" // This will change to currents-mcp when we publish the package
+      ],
+      "env": { // This is the current way for setting env variables (see [google maps](https://github.com/modelcontextprotocol/servers/tree/main/src/google-maps#npx) example. See [slack](https://github.com/modelcontextprotocol/servers/tree/main/src/slack#npx) example)
+        "CURRENTS_API_KEY": "your-api-key",
+        "CURRENTS_API_URL": "https://api-staging.currents.dev/v1" // will disappear by default using production url
+      }
     }
   }
 }
 ```
-5. Open the cursor settings and add a new mcp server
-   
-   <img width="707" alt="image" src="https://github.com/user-attachments/assets/a34c7b3f-b40a-4d53-a363-f243f452d835" />
-6. Set the previous JSON object into the mcp config file
-   
-   <img width="654" alt="image" src="https://github.com/user-attachments/assets/97e464c8-6cda-4acd-bf2d-8943b792c377" />
-7. Check it is active
-   
-   <img width="554" alt="image" src="https://github.com/user-attachments/assets/2142f958-12d4-469d-9d45-85ed0c05fd09" />

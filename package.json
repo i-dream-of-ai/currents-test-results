@@ -2,7 +2,7 @@
   "name": "currents-mcp",
   "type": "module",
   "bin": {
-    "currents": "./build/index.js"
+    "currents-mcp": "./build/index.js"
   },
   "files": [
     "build"
@@ -20,6 +20,7 @@
   "license": "ISC",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.8.0",
+    "dotenv": "^16.4.7",
     "zod": "^3.24.2"
   },
   "devDependencies": {

@@ -1,18 +1,15 @@
 {
-  "name": "currents-mcp",
+  "name": "@currents/mcp",
   "type": "module",
-  "bin": {
-    "currents-mcp": "./build/index.js"
-  },
   "files": [
     "build"
   ],
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "Currents MCP server",
   "main": "index.js",
   "scripts": {
     "build": "tsc && chmod 755 build/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "publish:mcp": "npm run publish:npm --workspace @currents/mcp",
     "start": "node build/index.js"
   },
   "keywords": [],

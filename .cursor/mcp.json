@@ -4,10 +4,9 @@
       "name": "Currents",
       "description": "Currents MCP server",
       "command": "npx",
-      "args": ["-y", "./build/index.js"],
+      "args": ["-y", "@currents/mcp"],
       "env": {
-        "CURRENTS_API_KEY": "",
-        "CURRENTS_API_URL": "https://api-staging.currents.dev/v1"
+        "CURRENTS_API_KEY": ""
       }
     }
   }

@@ -35,7 +35,6 @@ jobs:
         run: |
           git config user.name "Currents NPM Bot"
           git config user.email "npm@currents.dev"
-          npm run build
           npm run publish:mcp -- -- --tag ${{ github.event.inputs.channel }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -4,7 +4,7 @@
   "files": [
     "build"
   ],
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Currents MCP server",
   "main": "index.js",
   "scripts": {

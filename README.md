@@ -12,9 +12,9 @@ This is a MCP server that allows you to use Currents API.
 
 - Get the run information by its ID
 
-3. `get-instance`
+3. `get-spec-file-attempts-and-errors`
 
-- Get the instance information by its ID
+- Get the instance information by its ID about attempts and errors
 
 1. Clone the project
 2. Run `npm install`

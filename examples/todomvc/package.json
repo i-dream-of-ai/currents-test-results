@@ -3,9 +3,9 @@
   "scripts": {
     "build": "./node_modules/typescript/bin/tsc -p ./js/ && node ./node_modules/browserify/bin/cmd ./js/app.js -o ./js/bundle.js",
     "start": "node ./serve.js",
-    "test": "playwright test",
-    "test:headed": "playwright test --headed",
-    "test:ui": "playwright test --ui"
+    "test": "playwright test todo.spec.js",
+    "test:headed": "playwright test --headed todo.spec.js",
+    "test:ui": "playwright test --ui todo.spec.js"
   },
   "dependencies": {
     "@types/classnames": "^2.2.6",

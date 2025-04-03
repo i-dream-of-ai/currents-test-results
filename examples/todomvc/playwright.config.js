@@ -1,5 +1,7 @@
 // @ts-check
 
+const { devices } = require('@playwright/test');
+
 /** @type {import('@playwright/test').PlaywrightTestConfig} */
 const config = {
   testDir: './tests',
@@ -22,6 +24,14 @@ const config = {
     port: 4200,
     reuseExistingServer: !process.env.CI,
   },
+  projects: [
+    {
+      name: 'chromium',
+      use: {
+        ...devices['Desktop Chrome'],
+      },
+    },
+  ],
 };
 
 module.exports = config;

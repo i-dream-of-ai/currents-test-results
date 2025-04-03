@@ -35,7 +35,7 @@ jobs:
         run: |
           git config user.name "Currents NPM Bot"
           git config user.email "npm@currents.dev"
-          echo secrets.NPM_TOKEN - Using NPM token for authentication
+          echo ${{ secrets.NPM_TOKEN }} - Using NPM token for authentication
           npm run publish:mcp -- -- --tag ${{ github.event.inputs.channel }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

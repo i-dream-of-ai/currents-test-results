@@ -16,12 +16,6 @@ This is a MCP server that allows you to use Currents API.
 
 - Get the instance information by its ID
 
-1. Clone the project
-2. Run `npm install`
-3. Run `npm run build`
-4. Check the MCP in Cursor's settings
-
-   <img width="554" alt="image" src="https://github.com/user-attachments/assets/2142f958-12d4-469d-9d45-85ed0c05fd09" />
 
 ## Setup
 
@@ -32,6 +26,13 @@ Get a Currents API key by following the [instructions here](https://docs.current
 ### Usage with Cursor Editor
 
 Go to Cursor Settings > MCP > Enable
+
+1. Clone the project
+2. Run `npm install`
+3. Run `npm run build`
+4. Check the MCP in Cursor's settings
+
+   <img width="554" alt="image" src="https://github.com/user-attachments/assets/2142f958-12d4-469d-9d45-85ed0c05fd09" />
 
 
 ### Usage with Claude Desktop

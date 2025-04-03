@@ -11,7 +11,8 @@
     "build": "tsc && chmod 755 build/index.js",
     "publish:mcp": "npm run publish:npm",
     "publish:npm": "npm run rm  && npm run build && ./publish.js",
-    "start": "node build/index.js"
+    "start": "node build/index.js",
+    "rm": "rimraf dist"
   },
   "keywords": [],
   "author": "",

@@ -1,0 +1,39 @@
+{
+  "name": "@currents/mcp",
+  "type": "module",
+  "files": [
+    "build"
+  ],
+  "bin": {
+    "currents-mcp": "./build/index.js"
+  },
+  "version": "0.1.1",
+  "description": "Currents MCP server",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && chmod 755 build/index.js",
+    "publish:mcp": "npm run publish:npm",
+    "publish:npm": "npm run rm  && npm run build && ./publish.cjs",
+    "start": "node build/index.js",
+    "rm": "rimraf dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.8.0",
+    "zod": "^3.24.2",
+    "commander": "^12.1.0"
+  },
+  "release-it": {
+    "git": {
+      "requireCleanWorkingDir": false
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.17",
+    "typescript": "^5.8.2",
+    "release-it": "^18.1.2",
+    "rimraf": "^6.0.1"
+  }
+}

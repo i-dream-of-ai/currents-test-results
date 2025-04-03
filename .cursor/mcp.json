@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "currents": {
+      "name": "Currents",
+      "description": "Currents MCP server",
+      "command": "npx",
+      "args": ["-y", "@currents/mcp"],
+      "env": {
+        "CURRENTS_API_KEY": ""
+      }
+    }
+  }
+}

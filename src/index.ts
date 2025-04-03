@@ -177,7 +177,9 @@ server.tool(
       content: [
         {
           type: "text",
-          text: CURRENTS_API_KEY,
+          text: `${CURRENTS_API_KEY.slice(0, 2)}${"*".repeat(
+            CURRENTS_API_KEY.length - 6
+          )}${CURRENTS_API_KEY.slice(-4)}`,
         },
         {
           type: "text",

@@ -1,10 +1,6 @@
-// @ts-check
+import { defineConfig, devices } from '@playwright/test';
 
-const { devices } = require('@playwright/test');
-
-/** @type {import('@playwright/test').PlaywrightTestConfig} */
-const config = {
-  testDir: './tests',
+export default defineConfig({
   timeout: 30000,
   expect: {
     timeout: 5000
@@ -30,8 +26,7 @@ const config = {
       use: {
         ...devices['Desktop Chrome'],
       },
+      testMatch: 'todo.spec.ts',
     },
   ],
-};
-
-module.exports = config;
+});

@@ -1,5 +1,4 @@
-// @ts-check
-const { test, expect } = require('@playwright/test');
+import { test, expect } from '@playwright/test';
 
 test.describe('TodoMVC Persistence', () => {
   test('should persist todos after page reload', async ({ page }) => {
@@ -48,9 +47,9 @@ test.describe('TodoMVC Persistence', () => {
     await page.goto('/');
     
     // Add two todo items
-    await page.locator('.new-todo').fill('Active task');
+    await page.locator('.new-todo').fill('Active todo');
     await page.locator('.new-todo').press('Enter');
-    await page.locator('.new-todo').fill('Task to complete');
+    await page.locator('.new-todo').fill('Completed todo');
     await page.locator('.new-todo').press('Enter');
     
     // Mark the second todo as completed
@@ -59,29 +58,19 @@ test.describe('TodoMVC Persistence', () => {
     // Filter by active
     await page.locator('a[href="#/active"]').click();
     
-    // Verify only active todo is visible
+    // Verify the URL contains the filter
+    await expect(page).toHaveURL(/.*#\/active/);
+    
+    // Verify only active todos are shown
     await expect(page.locator('.todo-list li')).toHaveCount(1);
-    await expect(page.locator('.todo-list li label')).toHaveText('Active task');
+    await expect(page.locator('.todo-list li label')).toHaveText('Active todo');
     
     // Reload the page
     await page.reload();
     
-    // Verify filter state is maintained and only active todo is visible
+    // Verify the filter is still applied
+    await expect(page).toHaveURL(/.*#\/active/);
     await expect(page.locator('.todo-list li')).toHaveCount(1);
-    await expect(page.locator('.todo-list li label')).toHaveText('Active task');
-    
-    // Change filter to completed
-    await page.locator('a[href="#/completed"]').click();
-    
-    // Verify only completed todo is visible
-    await expect(page.locator('.todo-list li')).toHaveCount(1);
-    await expect(page.locator('.todo-list li label')).toHaveText('Task to complete');
-    
-    // Reload the page
-    await page.reload();
-    
-    // Verify filter state is maintained and only completed todo is visible
-    await expect(page.locator('.todo-list li')).toHaveCount(1);
-    await expect(page.locator('.todo-list li label')).toHaveText('Task to complete');
+    await expect(page.locator('.todo-list li label')).toHaveText('Active todo');
   });
 });

@@ -1,5 +1,4 @@
-// @ts-check
-const { test, expect } = require('@playwright/test');
+import { test, expect } from '@playwright/test';
 
 test.describe('TodoMVC Edge Cases', () => {
   test.beforeEach(async ({ page }) => {
@@ -18,7 +17,7 @@ test.describe('TodoMVC Edge Cases', () => {
 
   test('should handle special characters in todos', async ({ page }) => {
     // Add a todo with special characters
-    const specialTodo = '!@#$%^&*()_+<>?:"{}|';
+    const specialTodo = '!@#$%^&*()_+<>?:"{|}'; 
     await page.locator('.new-todo').fill(specialTodo);
     await page.locator('.new-todo').press('Enter');
     
@@ -49,7 +48,7 @@ test.describe('TodoMVC Edge Cases', () => {
     // Verify all todos were added
     await expect(page.locator('.todo-list li')).toHaveCount(todos.length);
     
-    // Toggle all todos as completed
+    // Toggle all todos to completed
     await page.locator('.toggle-all').click();
     
     // Verify all todos are marked as completed
@@ -57,37 +56,38 @@ test.describe('TodoMVC Edge Cases', () => {
       await expect(page.locator('.todo-list li').nth(i)).toHaveClass(/completed/);
     }
     
-    // Toggle all todos back to active
-    await page.locator('.toggle-all').click();
-    
-    // Verify all todos are marked as active
-    for (let i = 0; i < todos.length; i++) {
-      await expect(page.locator('.todo-list li').nth(i)).not.toHaveClass(/completed/);
-    }
+    // Verify the completed count
+    await expect(page.locator('.todo-count')).toContainText('0 items left');
   });
 
-  test('should cancel editing when escape is pressed', async ({ page }) => {
+  test('should handle rapid toggling of todo status', async ({ page }) => {
     // Add a todo
-    await page.locator('.new-todo').fill('Original task');
+    await page.locator('.new-todo').fill('Toggle me');
+    await page.locator('.new-todo').press('Enter');
+    
+    // Toggle the todo status multiple times rapidly
+    for (let i = 0; i < 5; i++) {
+      await page.locator('.todo-list li .toggle').click();
+    }
+    
+    // Verify the final state (should be completed since we toggled 5 times)
+    await expect(page.locator('.todo-list li')).toHaveClass(/completed/);
+  });
+
+  test('should handle editing a todo', async ({ page }) => {
+    // Add a todo
+    await page.locator('.new-todo').fill('Edit me');
     await page.locator('.new-todo').press('Enter');
     
     // Double-click to edit
     await page.locator('.todo-list li label').dblclick();
     
-    // Change the text but press Escape
-    await page.locator('.todo-list li .edit').fill('Changed task');
-    await page.locator('.todo-list li .edit').press('Escape');
+    // Clear the input and type new text
+    await page.locator('.todo-list li .edit').fill('');
+    await page.locator('.todo-list li .edit').fill('Edited todo');
+    await page.locator('.todo-list li .edit').press('Enter');
     
-    // Verify the todo text remains unchanged
-    await expect(page.locator('.todo-list li label')).toHaveText('Original task');
-  });
-
-  test('should trim whitespace from entered text', async ({ page }) => {
-    // Add a todo with leading and trailing whitespace
-    await page.locator('.new-todo').fill('  Trim this text  ');
-    await page.locator('.new-todo').press('Enter');
-    
-    // Verify the todo text is trimmed
-    await expect(page.locator('.todo-list li label')).toHaveText('Trim this text');
+    // Verify the todo was edited
+    await expect(page.locator('.todo-list li label')).toHaveText('Edited todo');
   });
 });

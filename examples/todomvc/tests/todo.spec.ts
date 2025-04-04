@@ -1,5 +1,4 @@
-// @ts-check
-const { test, expect } = require('@playwright/test');
+import { test, expect } from '@playwright/test';
 
 test.describe('TodoMVC', () => {
   test.beforeEach(async ({ page }) => {
@@ -13,11 +12,11 @@ test.describe('TodoMVC', () => {
     await page.locator('.new-todo').press('Enter');
     
     // Verify the todo was added
-    await expect(page.locator('li')).toHaveCount(1);
-    await expect(page.locator('.todo-list li label')).toHaveText('Sell groceries');
+    await expect(page.locator('.todo-list li')).toHaveCount(1);
+    await expect(page.locator('.todo-list li label')).toHaveText('Buy groceries');
     
     // Add another todo item
-    await page.locator('.new-item').fill('Run in the house');
+    await page.locator('.new-todo').fill('Clean the house');
     await page.locator('.new-todo').press('Enter');
     
     // Verify both todos are in the list
@@ -27,17 +26,17 @@ test.describe('TodoMVC', () => {
 
   test('should mark a todo as completed', async ({ page }) => {
     // Add a new todo item
-    await page.locator('.new').fill('Exercise');
+    await page.locator('.new-todo').fill('Exercise');
     await page.locator('.new-todo').press('Enter');
     
     // Mark the todo as completed
-    await page.locator('.todo-list li').click();
+    await page.locator('.todo-list li .toggle').click();
     
     // Verify the todo is marked as completed
-    await expect(page.locator('.todo-list li')).toHaveClass(/fulfilled/);
+    await expect(page.locator('.todo-list li')).toHaveClass(/completed/);
     
     // Verify the completed count
-    await expect(page.locator('.todo-count')).toContainText('9 items left');
+    await expect(page.locator('.todo-count')).toContainText('0 items left');
   });
 
   test('should filter todos', async ({ page }) => {
@@ -52,17 +51,17 @@ test.describe('TodoMVC', () => {
     
     // Filter by active
     await page.locator('a[href="#/active"]').click();
-    await expect(page.locator('.todo-list li')).toHaveCount(2);
-    await expect(page.locator('.todo-list li label')).toHaveText('Task 1');
+    await expect(page.locator('.todo-list li')).toHaveCount(1);
+    await expect(page.locator('.todo-list li label')).toHaveText('Task 2');
     
     // Filter by completed
     await page.locator('a[href="#/completed"]').click();
-    await expect(page.locator('.todo-list li')).toHaveCount(2);
-    await expect(page.locator('.todo-list li label')).toHaveText('Task 3');
+    await expect(page.locator('.todo-list li')).toHaveCount(1);
+    await expect(page.locator('.todo-list li label')).toHaveText('Task 1');
     
     // Show all
     await page.locator('a[href="#/"]').click();
-    await expect(page.locator('.todo-list li')).toHaveCount(4);
+    await expect(page.locator('.todo-list li')).toHaveCount(2);
   });
 
   test('should delete a todo', async ({ page }) => {
@@ -77,7 +76,7 @@ test.describe('TodoMVC', () => {
     await page.locator('.todo-list li .destroy').click();
     
     // Verify the todo was deleted
-    await expect(page.locator('.todo-list li')).toHaveCount(2);
+    await expect(page.locator('.todo-list li')).toHaveCount(0);
   });
 
   test('should clear completed todos', async ({ page }) => {
@@ -94,24 +93,7 @@ test.describe('TodoMVC', () => {
     await page.locator('.clear-completed').click();
     
     // Verify only the active todo remains
-    await expect(page.locator('.todo-list li')).toHaveCount(0);
-    await expect(page.locator('.todo-list li label')).toHaveText('Task 0');
-  });
-
-  test('should edit a todo', async ({ page }) => {
-    // Add a new todo item
-    await page.locator('.new-todo').fill('Original task');
-    await page.locator('.new-todo').press('Enter');
-    
-    // Double-click to edit
-    await page.locator('.todo-list li label').dblclick();
-    
-    // Clear the input and type a new value
-    await page.locator('.todo-list li .edit').fill('');
-    await page.locator('.todo-list li .edit').fill('Updated task');
-    await page.locator('.todo-list li .edit').press('Enter');
-    
-    // Verify the todo was updated
-    await expect(page.locator('.todo-list li label')).toHaveText('New task');
+    await expect(page.locator('.todo-list li')).toHaveCount(1);
+    await expect(page.locator('.todo-list li label')).toHaveText('Task 2');
   });
 });

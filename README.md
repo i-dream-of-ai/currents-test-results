@@ -75,3 +75,7 @@ Add the following to your `claude_desktop_config.json`:
   }
 }
 ```
+
+
+### ⚠️ Notice
+By connecting AI tools (e.g., via MCP) to Currents, you are granting them access to your API key, test results and CI metadata. It is your responsibility to vet any AI agents or services you use, and to ensure they handle your data securely.

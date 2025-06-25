@@ -19,6 +19,8 @@ if (!options.tag) {
 }
 console.log(process.cwd());
 
+fs.copyFileSync("../README.md", "./README.md");
+
 pkg.devDependencies = {};
 delete pkg["release-it"];
 

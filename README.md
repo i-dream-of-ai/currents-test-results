@@ -1,5 +1,4 @@
 # Currents MCP Server
-[![smithery badge](https://smithery.ai/badge/@currents-dev/currents-mcp)](https://smithery.ai/server/@currents-dev/currents-mcp)
 
 This is a MCP server that allows you to provide test results context to your AI agents by connecting them to Currents. Useful for asking AI to fix or optimize tests failing in CI.
 

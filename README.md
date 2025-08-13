@@ -3,7 +3,7 @@
 This is a MCP server that allows you to provide test results context to your AI agents by connecting them to Currents. Useful for asking AI to fix or optimize tests failing in CI.
 
 
-[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=currents&config=eyJuYW1lIjoiQ3VycmVudHMiLCJkZXNjcmlwdGlvbiI6IkN1cnJlbnRzIE1DUCBzZXJ2ZXIiLCJjb21tYW5kIjoibnB4IC15IEBjdXJyZW50cy9tY3BAMS4wLjIiLCJlbnYiOnsiQ1VSUkVOVFNfQVBJX0tFWSI6InlvdXItY3VycmVudHMtYXBpLWtleSJ9fQ%3D%3D)
+[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en/install-mcp?name=currents&config=eyJjb21tYW5kIjoibnB4IC15IEBjdXJyZW50cy9tY3AiLCJlbnYiOnsiQ1VSUkVOVFNfQVBJX0tFWSI6InlvdXItYXBpLWtleSJ9fQ%3D%3D)
 
 ## Tools
 
